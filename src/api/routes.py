@@ -2,10 +2,11 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import Carteras, db
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
+mhor = Blueprint('mhor', __name__)
 
 
 @api.route('/hello', methods=['POST', 'GET'])
@@ -16,3 +17,8 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@mhor.route("/carteras", methods = ['GET'])
+def handle_carteras():
+    carteras = Carteras.query.all()
+    return jsonify(list(map(lambda cartera: cartera.serialize(), carteras))), 200
