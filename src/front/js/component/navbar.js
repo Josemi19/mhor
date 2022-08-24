@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 export const Navbar = () => {
 	return (
 		<>
-			<nav className="navbar navbar-dark bg-dark">
+			<nav className="navbar nbar">
 				<div className="container-fluid d-flex justify-content-center">
 					<Link to="/">
-						<span className="navbar-brand mb-0 h1">Mhor Design</span>
+						<span className="navbar-brand mb-0 h1 nombre-marca">Mhor Design</span>
 					</Link>
 				</div>
 			</nav>
