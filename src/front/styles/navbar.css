@@ -1,0 +1,11 @@
+.nbar{
+    background: transparent;
+    box-shadow: -7px -20px 20px 15px #000000;
+    margin-bottom: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.nombre-marca{
+    color: black;
+}

@@ -3,13 +3,3 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-.nbar{
-    background: transparent;
-    background-color: transparent;
-    border-bottom: 2px solid black;
-}
-
-.nombre-marca{
-    color: black;
-}
