@@ -5,14 +5,14 @@ import { Cloudinary } from 'cloudinary-core';
 
 const Cards = () => {
     const { store, actions } = useContext(Context)
-    var cl = new Cloudinary({ cloud_name: "drwck4b6d", secure: true });
+    const cl = new Cloudinary({ cloud_name: "drwck4b6d", secure: true });
     return (
         <>
             <div className='row'>
                 {store.carteras != "" ? (
                     store.carteras.map((cartera) => {
                         return (
-                            <div className='col-6' key={cartera.id}>
+                            <div className='col-6 col-md-3' key={cartera.id}>
                                 <div className="card">
                                     <img src={cartera.foto} className="card-img-top card-img" alt={cartera.nombre} />
                                     <div className="card-body">
