@@ -20,13 +20,14 @@ const Cards = () => {
                                         <p className="card-text">{cartera.caracteristicas}</p>
                                         <p className="card-text">{cartera.precio}</p>
                                     </div>
+                                    <button className="btn btn-dark" onClick={() => { actions.agregarOrden(cartera.nombre) }}>Agregar a la orden</button>
                                 </div>
                             </div>
                         )
                     })
                 )
                     :
-                    <h1>Chao</h1>
+                    <h1>Somethin went wrong. Sorry</h1>
                 }
             </div>
         </>
