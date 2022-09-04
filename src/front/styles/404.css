@@ -1,0 +1,38 @@
+/* .container {
+    display: flex;
+    justify-content: center;
+}
+
+.mainbox {
+    background-color: white;
+    margin: auto;
+    height: 600px;
+    width: 100%;
+    position: relative;
+}
+
+.err {
+    color: #090909;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 11rem;
+}
+
+.far {
+    font-size: 8.5rem;
+    color: #090909;
+}
+
+.msg {
+    text-align: center;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1.6rem;
+    position: absolute;
+    left: 16%;
+    top: 45%;
+    width: 75%;
+}
+
+.anchor-404 {
+    color: black;
+    font-style: italic;
+} */

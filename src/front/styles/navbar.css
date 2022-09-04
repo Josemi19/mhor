@@ -1,4 +1,4 @@
-.nbar{
+.nbar {
     background: transparent;
     box-shadow: -7px -20px 20px 15px #000000;
     margin-bottom: 20px;
@@ -6,6 +6,17 @@
     padding-right: 5px;
 }
 
-.nombre-marca{
+.nombre-marca {
     color: black;
 }
+
+/* .number-products {
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.carrito {
+    width: 20px;
+
+} */

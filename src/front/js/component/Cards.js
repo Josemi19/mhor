@@ -18,16 +18,18 @@ const Cards = () => {
                                     <div className="card-body">
                                         <p className="card-text">{cartera.nombre}</p>
                                         <p className="card-text">{cartera.caracteristicas}</p>
-                                        <p className="card-text">{cartera.precio}</p>
+                                        <p className="card-text">${cartera.precio}</p>
                                     </div>
-                                    <button className="btn btn-dark" onClick={() => { actions.agregarOrden(cartera.nombre) }}>Agregar a la orden</button>
+                                    <button className="btn btn-dark" onClick={() => { actions.agregarOrden(cartera.nombre), actions.agregarPrecio(cartera.precio) }}>Agregar a la orden</button>
                                 </div>
                             </div>
                         )
                     })
                 )
                     :
-                    <h1>Somethin went wrong. Sorry</h1>
+                    <div className='d-flex justify-content-center'>
+                        <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+                    </div>
                 }
             </div>
         </>

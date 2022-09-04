@@ -9,7 +9,7 @@ export const Navbar = () => {
 				<div className="container-fluid">
 					<div>
 						<Link to="/" className="navbar-brand nombre-marca">
-							Mhor Design
+							Mhor Style
 						</Link>
 					</div>
 					<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,10 +21,14 @@ export const Navbar = () => {
 								<a className="nav-link active" aria-current="page" href="/about">About</a>
 							</li>
 							<li className="nav-item">
-								<a className="nav-link" href="/order">Place Order</a>
+								<a className="nav-link active" href="/order">Place Order</a>
 							</li>
 						</ul>
 					</div>
+					{/* <i className="fa-stack">
+						<i className="fa-solid fa-bag-shopping fa-stack-2x carrito"></i>
+						<i className="fa-stack-1x number-products">2</i>
+					</i> */}
 				</div>
 			</nav>
 		</>

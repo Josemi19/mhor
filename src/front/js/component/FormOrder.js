@@ -6,6 +6,8 @@ import emailjs from "emailjs-com";
 const FormOrder = () => {
     const { store, actions } = useContext(Context)
     let Storeproductos = store.orden
+    const form = useRef();
+
     let [datos, setDatos] = useState({
         nombre: "",
         email: "",
@@ -20,7 +22,6 @@ const FormOrder = () => {
         setDatos({ ...datos, [e.target.name]: e.target.value })
     }
 
-    const form = useRef();
 
     let sendEmail = (e) => {
         e.preventDefault();
@@ -45,12 +46,33 @@ const FormOrder = () => {
                 deliveryOPickup: "",
                 direccion: ""
             })
-            alert("Pedido realizado con exito, revise su correo para mas informacion")
+            alert("Pedido realizado con exito, revise su correo para más información")
+            localStorage.removeItem("orden")
         }
         catch (error) {
             console.log("Something Happened", error)
         }
     }
+
+    const [total, setTotal] = useState(0)
+
+    function getTotal(precio) {
+        let totales = total
+        console.log(precio)
+        totales = totales + precio
+        setTotal(totales)
+        console.log(total)
+    }
+
+    function dinero() {
+        for (let cash of store.precios) {
+            getTotal(cash)
+        }
+    }
+
+    useEffect(() => {
+        dinero()
+    }, [])
 
     return (
         <>
@@ -85,7 +107,7 @@ const FormOrder = () => {
                         </div>
                         <input
                             type="text"
-                            className="form-item col-12"
+                            className="form-item col-12 col-md-7"
                             placeholder='Nombre de los Productos'
                             readOnly
                             value={Storeproductos}
@@ -94,43 +116,49 @@ const FormOrder = () => {
                         </input>
                         <input
                             type="text"
-                            className="form-item col-12"
+                            className="form-item col-12 col-md-7"
                             placeholder='Numero de Telefono'
                             onChange={(e) => handleDatos(e)}
                             name="numeroTelefono"
                             value={datos.numeroTelefono}
                         >
                         </input>
+                        <div className='col-12 col-md-7'>
+                            <select className="form-select"
+                                aria-label="metodo de pago"
+                                onChange={(e) => handleDatos(e)}
+                                name="metodoDePago"
+                            >
+                                <option defaultValue>Metodo de Pago</option>
+                                <option value="Zelle">Zelle</option>
+                                <option value="Pago Movil">Pago Movil</option>
+                                <option value="Paypal">Paypal</option>
+                            </select>
+                            <select className="form-select"
+                                aria-label="delivery o pickup"
+                                onChange={(e) => handleDatos(e)}
+                                name="deliveryOPickup"
+                            >
+                                <option defaultValue>Delivery o Pickup</option>
+                                <option value="Delivery">Delivery</option>
+                                <option value="Pickup">Pickup</option>
+                            </select>
+                        </div>
                         <input
                             type="text"
-                            className="form-item col-12"
-                            placeholder='Metodo de pago'
-                            onChange={(e) => handleDatos(e)}
-                            name="metodoDePago"
-                            value={datos.metodoDePago}
-                        >
-                        </input>
-                        <input
-                            type="text"
-                            className="form-item col-12"
-                            placeholder='Delivery o Pick up'
-                            onChange={(e) => handleDatos(e)}
-                            name="deliveryOPickup"
-                            value={datos.deliveryOPickup}
-                        >
-                        </input>
-                        <input
-                            type="text"
-                            className="form-item col-12"
+                            className="form-item col-12 col-md-7"
                             placeholder='Direccion del Delivery'
                             onChange={(e) => handleDatos(e)}
                             name="direccion"
                             value={datos.direccion}
                         >
                         </input>
-                        <button className='btn btn-dark' type='submit' value="Send">
-                            Enviar
-                        </button>
+                        <p>Total: $ {total}</p>
+                        <div className='d-flex justify-content-center mt-2'>
+                            <button className='btn btn-dark' type='submit' value="Send">
+                                Procesar Orden
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
