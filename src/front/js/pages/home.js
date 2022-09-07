@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import Cards from "../component/Cards";
+import Models from "../component/Models";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<>
-			<Cards />
+			<Models />
 		</>
 	);
 };

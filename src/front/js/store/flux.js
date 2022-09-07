@@ -2,8 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			carteras: [],
-			orden: JSON.parse(localStorage.getItem("orden")) || [],
-			precios: JSON.parse(localStorage.getItem("precios")) || []
+			orden: JSON.parse(sessionStorage.getItem("orden")) || [],
+			precios: JSON.parse(sessionStorage.getItem("precios")) || []
 		},
 		actions: {
 
@@ -30,7 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					...store,
 					orden: [...store.orden, cartera]
 				})
-				localStorage.setItem("orden", JSON.stringify(store.orden))
+				sessionStorage.setItem("orden", JSON.stringify(store.orden))
 			},
 
 			agregarPrecio: (precio) => {
@@ -39,7 +39,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					...store,
 					precios: [...store.precios, precio]
 				})
-				localStorage.setItem("precios", JSON.stringify(store.precios))
+				sessionStorage.setItem("precios", JSON.stringify(store.precios))
 			}
 		}
 	};

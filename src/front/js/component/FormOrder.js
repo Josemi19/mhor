@@ -47,32 +47,14 @@ const FormOrder = () => {
                 direccion: ""
             })
             alert("Pedido realizado con exito, revise su correo para más información")
-            localStorage.removeItem("orden")
+            sessionStorage.removeItem("orden")
         }
         catch (error) {
             console.log("Something Happened", error)
         }
     }
 
-    const [total, setTotal] = useState(0)
-
-    function getTotal(precio) {
-        let totales = total
-        console.log(precio)
-        totales = totales + precio
-        setTotal(totales)
-        console.log(total)
-    }
-
-    function dinero() {
-        for (let cash of store.precios) {
-            getTotal(cash)
-        }
-    }
-
-    useEffect(() => {
-        dinero()
-    }, [])
+    const total = store.precios.reduce((precio1, precio2) => precio1 + precio2, 0)
 
     return (
         <>
@@ -153,7 +135,7 @@ const FormOrder = () => {
                             value={datos.direccion}
                         >
                         </input>
-                        <p>Total: $ {total}</p>
+                        <p name="total">Total: $ {total}</p>
                         <div className='d-flex justify-content-center mt-2'>
                             <button className='btn btn-dark' type='submit' value="Send">
                                 Procesar Orden
