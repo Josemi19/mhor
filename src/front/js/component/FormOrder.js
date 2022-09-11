@@ -5,17 +5,30 @@ import emailjs from "emailjs-com";
 
 const FormOrder = () => {
     const { store, actions } = useContext(Context)
-    let Storeproductos = store.orden
+
+
     const form = useRef();
+
+    let carteras = store.orden.map((cartera) => {
+        return cartera.cartera
+    })
+
+    let precios = store.orden.map((precio) => {
+        return precio.precio
+    })
+
+    const total = precios.reduce((precio1, precio2) => precio1 + precio2, 0)
 
     let [datos, setDatos] = useState({
         nombre: "",
         email: "",
-        productos: Storeproductos,
+        productos: carteras,
         numeroTelefono: "",
         metodoDePago: "",
         deliveryOPickup: "",
-        direccion: ""
+        direccion: "",
+        total2: total,
+        datosDePago: ""
     })
 
     function handleDatos(e) {
@@ -44,7 +57,9 @@ const FormOrder = () => {
                 numeroTelefono: "",
                 metodoDePago: "",
                 deliveryOPickup: "",
-                direccion: ""
+                direccion: "",
+                total2: total,
+                datosDePago: ""
             })
             alert("Pedido realizado con exito, revise su correo para más información")
             sessionStorage.removeItem("orden")
@@ -54,7 +69,16 @@ const FormOrder = () => {
         }
     }
 
-    const total = store.precios.reduce((precio1, precio2) => precio1 + precio2, 0)
+    const paymentData = () => {
+        if (datos.metodoDePago == "Zelle") return setDatos({ ...datos, datosDePago: "correo@zelle.com" })
+        if (datos.metodoDePago == "Pago Movil") return setDatos({ ...datos, datosDePago: "Mercantil, 042444, 27223" })
+        if (datos.metodoDePago == "Paypal") return setDatos({ ...datos, datosDePago: "josemmorrone@gmail.com" })
+    }
+
+    useEffect(() => {
+        paymentData()
+    }, [datos.metodoDePago])
+
 
     return (
         <>
@@ -92,7 +116,7 @@ const FormOrder = () => {
                             className="form-item col-12 col-md-7"
                             placeholder='Nombre de los Productos'
                             readOnly
-                            value={Storeproductos}
+                            value={carteras}
                             name="productos"
                         >
                         </input>
@@ -135,7 +159,8 @@ const FormOrder = () => {
                             value={datos.direccion}
                         >
                         </input>
-                        <p name="total">Total: $ {total}</p>
+                        <input type="text" readOnly name="total" className='form-item col-12 col-md-7' value={`$${total}`}></input>
+                        <input type="text" readOnly name="datosDePago" className='form-item col-12 col-md-7 d-none' value={datos.datosDePago}></input>
                         <div className='d-flex justify-content-center mt-2'>
                             <button className='btn btn-dark' type='submit' value="Send">
                                 Procesar Orden

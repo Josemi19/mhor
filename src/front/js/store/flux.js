@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			carteras: [],
 			orden: JSON.parse(sessionStorage.getItem("orden")) || [],
-			precios: JSON.parse(sessionStorage.getItem("precios")) || []
+			// precios: JSON.parse(sessionStorage.getItem("precios")) || []
 		},
 		actions: {
 
@@ -26,20 +26,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			agregarOrden: (cartera) => {
 				let store = getStore()
-				setStore({
-					...store,
-					orden: [...store.orden, cartera]
-				})
-				sessionStorage.setItem("orden", JSON.stringify(store.orden))
+				console.log(store.orden[0])
+				if (store.orden[0] == "") {
+					console.log("entre al if")
+					setStore({
+						...store,
+						orden: [cartera]
+					})
+					sessionStorage.setItem("orden", JSON.stringify(store.orden))
+				} else {
+					console.log("no entre al if")
+					setStore({
+						...store,
+						orden: [...store.orden, cartera]
+					})
+					sessionStorage.setItem("orden", JSON.stringify(store.orden))
+				}
 			},
 
-			agregarPrecio: (precio) => {
+			quitarOrden: (name) => {
 				let store = getStore()
+				let newOrden = store.orden.filter(orden => orden.cartera !== name)
 				setStore({
 					...store,
-					precios: [...store.precios, precio]
+					orden: newOrden
 				})
-				sessionStorage.setItem("precios", JSON.stringify(store.precios))
+				sessionStorage.setItem("orden", JSON.stringify(store.orden))
 			}
 		}
 	};
